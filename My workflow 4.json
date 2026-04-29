@@ -1,5 +1,5 @@
 {
-  "name": "My workflow 4",
+  "name": "Google Sheets to Gmail Automation (Safe Template)",
   "nodes": [
     {
       "parameters": {
@@ -7,74 +7,39 @@
           "item": [
             {
               "mode": "everyMinute"
-            },
-            {}
+            }
           ]
         },
-        "documentId": {
-          "__rl": true,
-          "value": "1z2oevGG8TvwzAxZLbFds8Tgp-48gRSEdCn56FMhWiJs",
-          "mode": "list",
-          "cachedResultName": "employees",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1z2oevGG8TvwzAxZLbFds8Tgp-48gRSEdCn56FMhWiJs/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1z2oevGG8TvwzAxZLbFds8Tgp-48gRSEdCn56FMhWiJs/edit#gid=0"
-        },
+        "documentId": "YOUR_GOOGLE_SHEET_ID",
+        "sheetName": "Sheet1",
         "event": "rowAdded",
         "options": {}
       },
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
-      "position": [
-        0,
-        0
-      ],
-      "id": "33467dab-9280-4804-98fd-9df096b6ed76",
-      "name": "Google Sheets Trigger",
-      "credentials": {
-        "googleSheetsTriggerOAuth2Api": {
-          "id": "KdVNkyM2etF6VKTA",
-          "name": "google sheet"
-        }
-      }
+      "position": [0, 0],
+      "name": "Google Sheets Trigger"
     },
     {
       "parameters": {
         "sendTo": "={{ $json.email }}",
-        "subject": "new task",
+        "subject": "New Task Assigned",
         "emailType": "text",
-        "message": "=hi  {{ $json.name }}\nap ka new task {{ $json.task }}",
+        "message": "=Hi {{ $json.name }},\nYou have a new task: {{ $json.task }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
-      "position": [
-        208,
-        0
-      ],
-      "id": "d978bf47-a1af-4699-98f9-cd57ad6ccb1f",
-      "name": "Send a message",
-      "webhookId": "62f2b6e0-fe61-414b-a3ba-fdb292297e40",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "ny74X13VS3JiQbPC",
-          "name": "Gmail account"
-        }
-      }
+      "typeVersion": 2,
+      "position": [250, 0],
+      "name": "Send Email"
     }
   ],
-  "pinData": {},
   "connections": {
     "Google Sheets Trigger": {
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Send Email",
             "type": "main",
             "index": 0
           }
@@ -82,16 +47,8 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate"
-  },
-  "versionId": "df10b494-8508-482f-84ee-3554a194c618",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "016fc0340d5bca8a0c6c73b85fee9f8049911e2827bdfaaa12c8ad88c03f5cd5"
-  },
-  "id": "GoXShmOHHmOTxtH9",
-  "tags": []
+    "executionOrder": "v1"
+  }
 }
